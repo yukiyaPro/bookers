@@ -1,0 +1,26 @@
+<%= form_with model:@user, local:true do |f|%>
+    <div class="field row">
+	    <%= f.label :name, "name" %>
+        <%= f.text_field :name, value:@user.name, class:"col-xs-12" %>
+    </div>
+    <div class="field row">
+        <%= f.label :profile_image, "Image" %>
+        <%= f.attachment_field :profile_image, class:"col-xs-12" %>
+    </div>
+    <div class="field row">
+        <%= f.label :introduction, "Introduction" %>
+        <%= f.text_area :introduction, class:"col-xs-12" %>
+    </div>
+    <div class="actions row">
+        <%= f.submit 'Update User', class:"col-xs-12 btn btn-primary"%>
+    </div>
+    <%if @user.present? %>
+        <% if @user.errors.any? %>
+            <% @user.errors.full_messages.each do |message| %>
+                <div class="field">
+                    <p><%= message %> error</p>
+                </div>
+            <% end %>
+        <% end %>
+    <% end %>
+<% end %>

@@ -1,0 +1,41 @@
+<h2>User Info</h2>
+<%= attachment_image_tag @user, :profile_image, fallback: "no_image.jpg",size:"100x100" %>
+<table class="table">
+    <tbody>
+        <tr></tr>
+        <tr>
+            <th>name</th>
+            <th><%= @user.name %></th>
+        </tr>
+        <tr>
+            <th>introduction</th>
+            <th><%= @user.introduction %></th>
+        </tr>
+    </tbody>
+</table>
+<div class="row">
+    <%= link_to "", edit_user_path(current_user),class:"col-xs-12 btn btn-default glyphicon glyphicon-wrench" %>
+</div>
+<h2>New Book</h2>
+<%= form_with model:@new_book, local:true do |f|%>
+    <div class="field row">
+	    <%= f.label :title, "Title" %><br />
+        <%= f.text_field :title %>
+    </div>
+    <div class="field row">
+        <%= f.label :body, "Opinion" %><br />
+        <%= f.text_area :body %>
+    </div>
+    <div class="actions row">
+        <%= f.submit 'Create Book' ,class: "btn btn-primary col-xs-12"%>
+    </div>
+    <%if @book.present? %>
+        <% if @book.errors.any? %>
+            <% @book.errors.full_messages.each do |message| %>
+                <div class="field row">
+                    <p><%= message %> error</p>
+                </div>
+            <% end %>
+        <% end %>
+    <% end %>
+<% end %>
