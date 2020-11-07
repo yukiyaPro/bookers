@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :books
   resources :top, only:[:index]
-  resources :about, only:[:index]
+  get  "home"  => "home#index"
+  get  "home/about"  => "home#about"
   resources :users, only:[:index,:show,:edit,:update]
 end

@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  def index
+    before_action :authenticate_user!
+    def index
         @users=User.all.order("id DESC")
         @new_book = Book.new
         @user = current_user
@@ -11,7 +12,7 @@ class UsersController < ApplicationController
     end
 
     def edit
-        @user = User.find(params[:id])
+        @user = current_user
     end
 
     def update
@@ -20,7 +21,7 @@ class UsersController < ApplicationController
             if @user.update(user_params)
                 redirect_to user_path(current_user) ,notice:"User was successfully updated"
             else
-                render :index
+                render :edit
             end
         end
     end
