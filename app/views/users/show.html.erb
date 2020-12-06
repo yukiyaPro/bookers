@@ -19,11 +19,16 @@
             <tr>
               <td>
                 <%= link_to user_path(@user) do %>
-                  <%= attachment_image_tag @user, :profile_image, :fill, class: "img-circle pull-left profile-thumb", fallback: "no_image.jpg" ,size:"40x40"%></br>
+                  <%= attachment_image_tag @user, :profile_image, class: "img-circle pull-left profile-thumb", fallback: "no_image.jpg" ,size:"40x40"%></br>
                 <% end %>
               </td>
               <td><%= link_to "#{book.title}", book_path(book) %></td>
               <td><%= book.body %></td>
+              <%if book.book_comments.present? %>
+                <td>コメント数:<%= book.book_comments.count %></td>
+              <% else %>
+                <td>コメント数:0</td>
+              <% end %>
             </tr>
           <% end %>
         </tbody>

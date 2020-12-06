@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root to: "top#index"
   devise_for :users
-  resources :books,only:[:new,:create,:index,:show,:edit,:update]
-  delete  "/books/:id"  => "books#destroy"
-  resources :top, only:[:index]
+  root to: "top#index"
   get  "home"  => "home#index"
   get  "home/about"  => "home#about"
+  resources :books do
+    resources :book_comments, only:[:index,:create,:edit,:destroy,:update]
+    resource :favorites, only:[:create,:destroy]
+  end
+  resources :top, only:[:index]
   resources :users, only:[:index,:show,:edit,:update]
 end

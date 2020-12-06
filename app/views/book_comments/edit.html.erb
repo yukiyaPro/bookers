@@ -1,0 +1,20 @@
+<h2>Edit Comment</h2>
+<%= form_with model:[@book,@comment], local:true do |f|%>
+    <% f.hidden_field :book_id, value: @comment.book_id %>
+    <div class="field row">
+        <%= f.label :comment, "Comment" %><br />
+        <%= f.text_area :comment, class:"col-xs-12"%>
+    </div>
+    <div class="actions row">
+        <%= f.submit 'Update Comment' ,class: "btn btn-primary col-xs-12"%>
+    </div>
+    <%if @comment.present? %>
+        <% if @comment.errors.any? %>
+            <% @comment.errors.full_messages.each do |message| %>
+                <div class="field row">
+                    <p><%= message %> error</p>
+                </div>
+            <% end %>
+        <% end %>
+    <% end %>
+<% end %>
